@@ -50,3 +50,23 @@ document.getElementsByTagName("header")[0].addEventListener("dblclick", () => {
         linkBootstrap.disabled = false;
     }
 });
+
+// Handle all cards view mouseover
+var cards = document.querySelectorAll(".card");
+cards.forEach((card) => {
+    card.getElementsByClassName("btn-success")[0].addEventListener(
+        "mouseover",
+        () => {
+            card.getElementsByClassName("card-text")[0].classList.toggle(
+                "collapse"
+            );
+            console.log(card);
+            let img = card.getElementsByTagName("img")[0];
+            if (img.style.width == "20%") {
+                img.style.width = "100%";
+            } else {
+                img.style.width = "20%";
+            }
+        }
+    );
+});
