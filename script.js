@@ -132,3 +132,29 @@ document
         // Add the class order-last to the last card
         cards[cards.length - 1].classList.add("order-first");
     });
+
+// Handle keydown on navbar-brand only if the user selected the text
+document
+    .getElementsByClassName("navbar-brand")[0]
+    .addEventListener("keydown", (e) => {
+        let body = document.getElementsByTagName("body")[0];
+
+        // Body style reset
+        body.classList = "";
+
+        // Prevent default
+        e.preventDefault();
+
+        // Handle keypress
+        if (e.key == "a") {
+            body.classList.add("col-4");
+        }
+        if (e.key == "y") {
+            body.classList.add("col-4");
+            body.classList.add("offset-4");
+        }
+        if (e.key == "p") {
+            body.classList.add("col-4");
+            body.classList.add("offset-8");
+        }
+    });
