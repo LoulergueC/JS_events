@@ -12,3 +12,12 @@ document
     .addEventListener("click", () => {
         document.getElementById("navbarHeader").classList.toggle("collapse");
     });
+
+// First card edit handle
+var firstcard = document.getElementsByClassName("card")[0];
+
+firstcard
+    .getElementsByClassName("btn-outline-secondary")[0]
+    .addEventListener("click", () => {
+        firstcard.style.color = "red";
+    });
