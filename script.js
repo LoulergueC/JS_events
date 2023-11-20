@@ -71,7 +71,15 @@ cards.forEach((card) => {
     );
 });
 
-// Handle click on btn ==>
+// Add order for all cards
+document
+    .getElementsByClassName("album")[0]
+    .querySelectorAll(".col-md-4")
+    .forEach((card, i) => {
+        card.classList.add("order-" + i);
+    });
+
+// Handle click on btn ==> (new method)
 document
     .getElementsByClassName("jumbotron")[0]
     .getElementsByClassName("btn-secondary")[0]
@@ -79,27 +87,8 @@ document
         // Disable the link
         e.preventDefault();
 
-        var cards = document
-            .getElementsByClassName("album")[0]
-            .querySelectorAll(".col-md-4:not(.order-last)");
-
-        // If all cards are order-last, remove order-last from all cards
-        if (cards.length == 0) {
-            document
-                .getElementsByClassName("album")[0]
-                .querySelectorAll(".col-md-4")
-                .forEach((card) => {
-                    card.classList.remove("order-last");
-                });
-
-            // redefine the var cards to the new list without order-last
-            cards = document
-                .getElementsByClassName("album")[0]
-                .querySelectorAll(".col-md-4:not(.order-last)");
-        }
-
-        // Add the class order-last to the first card
-        cards[0].classList.add("order-last");
+        // Change the order
+        changeOrderOfCards("down");
     });
 
 // Handle click on btn <==
@@ -110,28 +99,102 @@ document
         // Disable the link
         e.preventDefault();
 
-        var cards = document
-            .getElementsByClassName("album")[0]
-            .querySelectorAll(".col-md-4:not(.order-first)");
+        // Change the order
+        changeOrderOfCards("up");
+    });
 
-        // If all cards are order-last, remove order-last from all cards
-        if (cards.length == 0) {
-            document
-                .getElementsByClassName("album")[0]
-                .querySelectorAll(".col-md-4")
-                .forEach((card) => {
-                    card.classList.remove("order-first");
-                });
+function changeOrderOfCards(direction) {
+    var cards = document
+        .getElementsByClassName("album")[0]
+        .querySelectorAll(".col-md-4");
 
-            // redefine the var cards to the new list without order-last
-            cards = document
-                .getElementsByClassName("album")[0]
-                .querySelectorAll(".col-md-4:not(.order-first)");
+    cards.forEach((card) => {
+        let currentpos = card.classList[1].slice(-1);
+        currentpos = parseInt(currentpos);
+
+        if (direction == "up") {
+            if (currentpos > 0) {
+                card.classList.remove("order-" + currentpos);
+                card.classList.add("order-" + (currentpos - 1));
+            } else {
+                card.classList.remove("order-0");
+                card.classList.add("order-5");
+            }
         }
 
-        // Add the class order-last to the last card
-        cards[cards.length - 1].classList.add("order-first");
+        if (direction == "down") {
+            if (currentpos < 5) {
+                card.classList.remove("order-" + currentpos);
+                card.classList.add("order-" + (currentpos + 1));
+            } else {
+                card.classList.remove("order-5");
+                card.classList.add("order-0");
+            }
+        }
     });
+}
+
+// Handle click on btn ==>
+// document
+//     .getElementsByClassName("jumbotron")[0]
+//     .getElementsByClassName("btn-secondary")[0]
+//     .addEventListener("click", (e) => {
+//         // Disable the link
+//         e.preventDefault();
+
+//         var cards = document
+//             .getElementsByClassName("album")[0]
+//             .querySelectorAll(".col-md-4:not(.order-last)");
+
+//         // If all cards are order-last, remove order-last from all cards
+//         if (cards.length == 0) {
+//             document
+//                 .getElementsByClassName("album")[0]
+//                 .querySelectorAll(".col-md-4")
+//                 .forEach((card) => {
+//                     card.classList.remove("order-last");
+//                 });
+
+//             // redefine the var cards to the new list without order-last
+//             cards = document
+//                 .getElementsByClassName("album")[0]
+//                 .querySelectorAll(".col-md-4:not(.order-last)");
+//         }
+
+//         // Add the class order-last to the first card
+//         cards[0].classList.add("order-last");
+//     });
+
+// // Handle click on btn <==
+// document
+//     .getElementsByClassName("jumbotron")[0]
+//     .getElementsByClassName("btn-primary")[0]
+//     .addEventListener("click", (e) => {
+//         // Disable the link
+//         e.preventDefault();
+
+//         var cards = document
+//             .getElementsByClassName("album")[0]
+//             .querySelectorAll(".col-md-4:not(.order-first)");
+
+//         // If all cards are order-last, remove order-last from all cards
+//         if (cards.length == 0) {
+//             document
+//                 .getElementsByClassName("album")[0]
+//                 .querySelectorAll(".col-md-4")
+//                 .forEach((card) => {
+//                     card.classList.remove("order-first");
+//                 });
+
+//             // redefine the var cards to the new list without order-last
+//             cards = document
+//                 .getElementsByClassName("album")[0]
+//                 .querySelectorAll(".col-md-4:not(.order-first)");
+//         }
+
+//         // Add the class order-last to the last card
+//         cards[cards.length - 1].classList.add("order-first");
+//     });
 
 // Handle keydown on navbar-brand only if the user selected the text
 document
