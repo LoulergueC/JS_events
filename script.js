@@ -70,3 +70,31 @@ cards.forEach((card) => {
         }
     );
 });
+
+// Handle click on btn ==>
+document
+    .getElementsByClassName("jumbotron")[0]
+    .getElementsByClassName("btn-secondary")[0]
+    .addEventListener("click", () => {
+        var cards = document
+            .getElementsByClassName("album")[0]
+            .querySelectorAll(".col-md-4:not(.order-last)");
+
+        // If all cards are order-last, remove order-last from all cards
+        if (cards.length == 0) {
+            document
+                .getElementsByClassName("album")[0]
+                .querySelectorAll(".col-md-4")
+                .forEach((card) => {
+                    card.classList.remove("order-last");
+                });
+
+            // redefine the var cards to the new list without order-last
+            cards = document
+                .getElementsByClassName("album")[0]
+                .querySelectorAll(".col-md-4:not(.order-last)");
+        }
+
+        // Add the class order-last to the first card
+        cards[0].classList.add("order-last");
+    });
