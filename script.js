@@ -34,3 +34,19 @@ secondcard
             secondcard.style.color = "green";
         }
     });
+
+// Disable bootstrap by double clicking navbar
+var bootstraphref =
+    "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+
+document.getElementsByTagName("header")[0].addEventListener("dblclick", () => {
+    let linkBootstrap = document.querySelector(
+        'link[rel="stylesheet"][href="' + bootstraphref + '"]'
+    );
+
+    if (linkBootstrap.disabled == false) {
+        linkBootstrap.disabled = true;
+    } else {
+        linkBootstrap.disabled = false;
+    }
+});
