@@ -75,7 +75,10 @@ cards.forEach((card) => {
 document
     .getElementsByClassName("jumbotron")[0]
     .getElementsByClassName("btn-secondary")[0]
-    .addEventListener("click", () => {
+    .addEventListener("click", (e) => {
+        // Disable the link
+        e.preventDefault();
+
         var cards = document
             .getElementsByClassName("album")[0]
             .querySelectorAll(".col-md-4:not(.order-last)");
@@ -97,4 +100,35 @@ document
 
         // Add the class order-last to the first card
         cards[0].classList.add("order-last");
+    });
+
+// Handle click on btn <==
+document
+    .getElementsByClassName("jumbotron")[0]
+    .getElementsByClassName("btn-primary")[0]
+    .addEventListener("click", (e) => {
+        // Disable the link
+        e.preventDefault();
+
+        var cards = document
+            .getElementsByClassName("album")[0]
+            .querySelectorAll(".col-md-4:not(.order-first)");
+
+        // If all cards are order-last, remove order-last from all cards
+        if (cards.length == 0) {
+            document
+                .getElementsByClassName("album")[0]
+                .querySelectorAll(".col-md-4")
+                .forEach((card) => {
+                    card.classList.remove("order-first");
+                });
+
+            // redefine the var cards to the new list without order-last
+            cards = document
+                .getElementsByClassName("album")[0]
+                .querySelectorAll(".col-md-4:not(.order-first)");
+        }
+
+        // Add the class order-last to the last card
+        cards[cards.length - 1].classList.add("order-first");
     });
