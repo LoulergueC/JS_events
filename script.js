@@ -21,3 +21,16 @@ firstcard
     .addEventListener("click", () => {
         firstcard.style.color = "red";
     });
+
+// Second card edit handle
+var secondcard = document.getElementsByClassName("card")[1];
+
+secondcard
+    .getElementsByClassName("btn-outline-secondary")[0]
+    .addEventListener("click", () => {
+        if (secondcard.style.color == "green") {
+            secondcard.style.color = "inherit";
+        } else {
+            secondcard.style.color = "green";
+        }
+    });
